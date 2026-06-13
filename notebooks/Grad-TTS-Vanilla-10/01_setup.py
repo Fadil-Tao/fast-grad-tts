@@ -10,11 +10,12 @@ import subprocess
 REPO_DIR = '/content/fast-grad-tts'
 GRAD_TTS_DIR = os.path.join(REPO_DIR, 'grad_tts')
 
-# Python deps. Most are preinstalled on Colab; this mainly adds einops / inflect
-# / Unidecode. numpy is left unpinned (no numpy-1-only APIs are used) so we don't
-# fight Colab's numpy-2 stack. Output is shown (no -q) so failures are visible.
+# Python deps. Colab already ships torch, torchaudio, numpy, scipy, matplotlib,
+# librosa, tqdm and Cython, so we only add the few pure-Python packages it lacks.
+# We do NOT use requirements-modern.txt here (pinning numpy/librosa/etc would fight
+# Colab's preinstalled stack); that file is for bare-machine installs.
 subprocess.run([sys.executable, '-m', 'pip', 'install',
-                '-r', os.path.join(REPO_DIR, 'requirements-modern.txt')], check=True)
+                'einops>=0.6', 'inflect>=6.0', 'Unidecode>=1.3'], check=True)
 
 # Build the Cython Monotonic Alignment Search extension (compiled .so is
 # arch-specific, so rebuild it every Colab session — it is quick).
