@@ -9,7 +9,7 @@ drive.mount('/content/drive')
 
 # --- EDIT THESE ------------------------------------------------------------
 DRIVE_ROOT      = '/content/drive/MyDrive/speech-processing'
-DATASET_DIR     = os.path.join(DRIVE_ROOT, 'Dataset')                       # LJSpeech root
+DATASET_DIR     = os.path.join(DRIVE_ROOT, 'Dataset', 'raw', 'LJSpeech-1.1')  # has wavs/ + metadata.csv
 VANILLA_LOG_DIR = os.path.join(DRIVE_ROOT, 'logs', 'Grad-TTS-Vanilla-10')   # teacher ckpts
 DISTILL_LOG_DIR = os.path.join(DRIVE_ROOT, 'logs', 'Grad-TTS-Distilled-2')  # students saved here
 HIFIGAN_CKPT    = os.path.join(DRIVE_ROOT, 'hifigan.pt')

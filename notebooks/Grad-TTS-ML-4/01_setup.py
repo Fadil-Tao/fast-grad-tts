@@ -10,10 +10,10 @@ import subprocess
 REPO_DIR = '/content/fast-grad-tts'
 GRAD_TTS_DIR = os.path.join(REPO_DIR, 'grad_tts')
 
-# Python deps. requirements-modern.txt pins numpy<2 because the repo + hifi-gan
-# use legacy numpy APIs (np.float etc). If Colab had numpy 2 already imported you
-# may need to: Runtime > Restart session, then re-run this cell.
-subprocess.run([sys.executable, '-m', 'pip', 'install', '-q',
+# Python deps. Most are preinstalled on Colab; this mainly adds einops / inflect
+# / Unidecode. numpy is left unpinned (no numpy-1-only APIs are used) so we don't
+# fight Colab's numpy-2 stack. Output is shown (no -q) so failures are visible.
+subprocess.run([sys.executable, '-m', 'pip', 'install',
                 '-r', os.path.join(REPO_DIR, 'requirements-modern.txt')], check=True)
 
 # Build the Cython Monotonic Alignment Search extension (compiled .so is

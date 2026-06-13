@@ -47,7 +47,7 @@ the cells of a variant in numeric order, in a single GPU session.
 
 ```
 MyDrive/speech-processing/
-  Dataset/                 # LJSpeech-1.1
+  Dataset/raw/LJSpeech-1.1/
     wavs/*.wav             # 22.05 kHz
     metadata.csv
   hifigan.pt               # HiFi-GAN vocoder checkpoint (see below)

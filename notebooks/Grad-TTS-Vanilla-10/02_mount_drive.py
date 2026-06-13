@@ -7,7 +7,7 @@ drive.mount('/content/drive')
 # --- EDIT THESE to match your Drive layout ---------------------------------
 # LJSpeech is expected at DATASET_DIR/wavs/*.wav (22.05 kHz) + DATASET_DIR/metadata.csv.
 DRIVE_ROOT   = '/content/drive/MyDrive/speech-processing'
-DATASET_DIR  = os.path.join(DRIVE_ROOT, 'Dataset')                      # LJSpeech root
+DATASET_DIR  = os.path.join(DRIVE_ROOT, 'Dataset', 'raw', 'LJSpeech-1.1')  # has wavs/ + metadata.csv
 LOG_DIR      = os.path.join(DRIVE_ROOT, 'logs', 'Grad-TTS-Vanilla-10')  # checkpoints persist here
 HIFIGAN_CKPT = os.path.join(DRIVE_ROOT, 'hifigan.pt')                   # vocoder, see README
 # ---------------------------------------------------------------------------

@@ -1,9 +1,13 @@
-# Modern, py3.10/3.11-compatible deps (originals in requirements.txt target py3.6).
-# Install torch SEPARATELY for your CUDA version first, e.g.:
+# Modern deps (originals in requirements.txt target py3.6 / old pins).
+# torch + torchaudio come preinstalled on Colab; on a bare machine install a
+# CUDA torch first, e.g.:
 #   pip install torch --index-url https://download.pytorch.org/whl/cu121
 # then: pip install -r requirements-modern.txt
+#
+# numpy is intentionally NOT pinned: the repo uses no removed numpy-1 APIs, and
+# forcing numpy<2 conflicts with Colab's preinstalled numpy-2 stack (torch/numba).
 Cython>=0.29
-numpy<2.0          # numba/librosa + legacy np.float usage need numpy 1.x
+numpy
 matplotlib>=3.5
 einops>=0.6
 inflect>=6.0
