@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+build/
+*.egg-info/
+
+# Cython MAS generated sources/artifacts (rebuilt per session)
+grad_tts/model/monotonic_align/core.c
+
+# Checkpoints / generated audio / logs (live in Drive, not the repo)
+*.pt
+*.wav
+out/
+logs/
+
+# Dataset symlink created at runtime
+grad_tts/DUMMY
+
+# Env
+.venv/
