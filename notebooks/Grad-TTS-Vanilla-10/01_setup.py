@@ -1,19 +1,27 @@
-# %% [cell 1] Setup — install deps, build Monotonic Alignment Search, set paths
-# Paste each NN_*.py file into its own Colab cell and run them top to bottom in
-# one session. Colab already provides a CUDA build of torch + torchaudio, so we
-# only install the remaining requirements here. Run this cell once per session.
+# %% [cell 1] Setup — clone repo, install deps, build Monotonic Alignment Search
+# Self-contained: paste this into the FIRST Colab cell and run it. It clones the
+# repo, installs the few packages Colab lacks, builds the Cython MAS extension and
+# sets up the import path. Run the remaining NN_*.py cells (one file = one cell)
+# top to bottom afterwards, in the same GPU session.
 import os
 import sys
 import subprocess
 
-# Where you cloned this repo inside Colab (e.g. after `!git clone <your-fork>`).
+REPO_URL = 'https://github.com/Fadil-Tao/fast-grad-tts.git'
 REPO_DIR = '/content/fast-grad-tts'
 GRAD_TTS_DIR = os.path.join(REPO_DIR, 'grad_tts')
 
-# Python deps. Colab already ships torch, torchaudio, numpy, scipy, matplotlib,
-# librosa, tqdm and Cython, so we only add the few pure-Python packages it lacks.
-# We do NOT use requirements-modern.txt here (pinning numpy/librosa/etc would fight
-# Colab's preinstalled stack); that file is for bare-machine installs.
+# Clone on first run; if the repo dir exists but is incomplete (stale/empty
+# clone) wipe and re-clone; otherwise just fast-forward to the latest commit.
+if not os.path.isdir(GRAD_TTS_DIR):
+    subprocess.run(['rm', '-rf', REPO_DIR], check=False)
+    subprocess.run(['git', 'clone', REPO_URL, REPO_DIR], check=True)
+else:
+    subprocess.run(['git', '-C', REPO_DIR, 'pull', '--ff-only'], check=False)
+
+# Colab already ships torch, torchaudio, numpy, scipy, matplotlib, librosa, tqdm
+# and Cython, so we only add the few pure-Python packages it lacks. (numpy is not
+# touched, to avoid fighting Colab's preinstalled numpy-2 stack.)
 subprocess.run([sys.executable, '-m', 'pip', 'install',
                 'einops>=0.6', 'inflect>=6.0', 'Unidecode>=1.3'], check=True)
 
